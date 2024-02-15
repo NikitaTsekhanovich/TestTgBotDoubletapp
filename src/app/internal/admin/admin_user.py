@@ -6,7 +6,4 @@ from app.internal.models.admin_user import AdminUser
 
 @admin.register(AdminUser)
 class AdminUserAdmin(UserAdmin):
-    list_display = ("id", "external_id", "phone_number")
-
-# class ProfileAdmin(admin.ModelAdmin):
-
+    list_display = ("id", "external_id", "first_name")
