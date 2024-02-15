@@ -29,8 +29,8 @@ class TelegramUser(models.Model):
     )
 
     class Meta:
-        verbose_name = "Профиль"
-        verbose_name_plural = "Профили"
+        verbose_name = "Телеграм аккаунт"
+        verbose_name_plural = "Телеграм аккаунты"
 
     def __str__(self):
         return f"Id telegram: {self.external_id}.\n" \

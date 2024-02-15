@@ -1,5 +1,5 @@
 from django.conf import settings
-from app.internal.models.admin_user import AdminUser
+from app.internal.models.telegram_user import TelegramUser
 
 import telebot
 import re
@@ -13,7 +13,7 @@ class Bot:
         def add_user_database(message):
             bot.send_message(message.chat.id, "Здарова!")
 
-            info_profile, is_new = AdminUser.objects.get_or_create(
+            info_profile, is_new = TelegramUser.objects.get_or_create(
                 external_id=message.from_user.id,
 
                 defaults={
@@ -43,7 +43,7 @@ class Bot:
 
             if is_number_phone:
                 try:
-                    user = AdminUser.objects.get(external_id=message.from_user.id)
+                    user = TelegramUser.objects.get(external_id=message.from_user.id)
                     user.phone_number = message.text
                     user.save()
                     bot.send_message(message.chat.id, "Телефон добавлен в базу")
@@ -64,7 +64,7 @@ class Bot:
         @bot.message_handler(commands=['me'])
         def get_me(message):
             try:
-                user = AdminUser.objects.get(external_id=message.from_user.id)
+                user = TelegramUser.objects.get(external_id=message.from_user.id)
                 bot.send_message(message.chat.id, f"{user.first_name}\n"
                                                   f"{user.last_name}\n"
                                                   f"{user.username}\n"
